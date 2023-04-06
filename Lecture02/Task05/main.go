@@ -50,7 +50,7 @@ func alg(n int, ch chan int) int {
 	}
 
 	// 4) build map(a)
-	m := make(map[int]int)
+	m := make([]int,0)
 	maxmet := false
 	for i, v := range a {
 		if !maxmet {
@@ -60,27 +60,25 @@ func alg(n int, ch chan int) int {
 			continue
 		}
 
-		if v%10 == 5 {
-			m[i]++
-		}
-
-		if i+1 < n && v > a[i+1] {
-			m[i]++
+		if v%10 == 5 && i+1 < n && v > a[i+1] {
+			m = append(m, i)
 		}
 	}
 
+	// find maximum in m
 	res := -1
-	for k, v := range m {
-		if v == 2 && a[k] > res {
-			res = a[k]
+	for _, v := range m {
+		if a[v] > res {
+			res = a[v]
 		}
 	}
 
 	if res == -1 {
-		// no matching result found
+		// no matching results found
 		return 0
 	}
 
+	// calculate bet possible rank 
 	ans := 1
 	for _, v := range a {
 		if v > res {

@@ -22,6 +22,11 @@ func Test_main(t *testing.T) {
 			want: 6,
 		},
 		{
+			name: "champion 2 steps before",
+			args: args{10, 20, 15, 10, 30, 3, 5, 1},
+			want: 6,
+		},
+		{
 			name: "std2",
 			args: args{15, 15, 10},
 			want: 1,
